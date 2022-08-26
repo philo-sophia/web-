@@ -1,0 +1,139 @@
+*{
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    font-family: 'Microsoft-Yahei',sans-serif;
+}
+
+/* 根据需要可去掉 */
+/* body{
+    background: radial-gradient(#333,#000);
+    height: 100vh;
+} */
+
+/* mainbox */
+.mainbox{
+    position: absolute;
+    left: 50%;
+    top: 50%;
+    transform: translate(-50%,-50%);
+}
+
+/* label文字框 */
+label{
+    position:relative;
+    background:#fff;
+    width: 150px;
+    height: 50px;
+    border-radius: 35px;
+    line-height: 50px;
+    text-align: center;
+    font-size: 22px;
+    font-weight: 500;
+    display: block;
+    color: #333;
+    cursor: pointer;
+    box-shadow: 0 0 4px rgba(0,0,0, 0.5);
+    transition: all 0.3s ease;
+}
+label:hover{
+    letter-spacing: 4px;
+}
+/* 制作取消文字框，用before伪元素 */
+label::before{
+    content: "取消";
+    position: absolute;
+    height: 100%;
+    width: 100%;
+    left: 0;
+    top: 0;
+    background: #fff;
+    border-radius: 35px;
+    /* 透明度为0，先不展示 */
+    opacity: 0;
+}
+
+/* 处理input选框 */
+#check{
+    display: none;
+}
+
+/* 通过input选框状态，切换取消文字的透明度为1 */
+#check:checked~label::before{
+    opacity: 1;
+}
+
+/* 修改图标样式 */
+.media-icons{
+    position: absolute;
+    left: 50%;
+    top: -120px;
+    transform: translateX(-50%);
+    background: #fff;
+    width: 140%;
+    height: 110%;
+    /* 找：先加上下面这句 */
+    text-align: center;
+    /* 没用，继续向下找 */
+    display: flex;
+    /* 下面这句写错了 */
+    /* align-items: flex; */
+    /* 改正后 */
+    align-items: center;
+    justify-content: space-evenly;
+    border-radius: 35px;
+    padding: 4px;
+    z-index: 1;
+    opacity: 0;
+    pointer-events: none;
+    box-shadow: 0 0 4px rgba(0,0,0, 0.5);
+    transition: all 0.3s ease;
+}
+
+/* 通过input选框，切换图标 */
+#check:checked~.media-icons{
+    opacity: 1;
+    pointer-events: auto;
+    top: -84px;
+
+}
+
+/* 制作小三角，用一个正方形旋转45度得 */
+.media-icons::before{
+    content: "";
+    width: 18px;
+    height: 18px;
+    position: absolute;
+    left: 50%;
+    background-color: #fff;
+    bottom: -9px;
+    box-shadow: 6px 6px 14px -6px rgba(0,0,0, 0.5);
+    /* box-shadow: 0 0 4px rgba(0,0,0, 0.5); */
+    transform: translateX(-50%) rotate(45deg);
+    z-index: -1;
+}
+
+/* 修改a链接样式（即图标） */
+.media-icons a{
+    font-size: 22px;
+    color: #333;
+    transition: all 0.3s ease;
+}
+/* 移动鼠标到图标上时上移 */
+.media-icons a:hover{
+    transform: translateY(-6px);
+}
+/* 当鼠标移动到某个图标时，修改颜色 */
+.media-icons a:nth-child(1):hover{
+    color: #002fa7;
+}
+.media-icons a:nth-child(2):hover{
+    color: #62b900;
+}
+.media-icons a:nth-child(3):hover{
+    color: #d42b2a;
+}
+.media-icons a:nth-child(4):hover{
+    color: #1C1C1F;
+}
+/* 图标不居中，回.media-icons找 */
